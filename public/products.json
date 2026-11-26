@@ -1,0 +1,13 @@
+[
+  {"id":1,"title":"Серый городской комплект","category":"Спортивные","price":8900,"rating":4.9,"available":true,"image":"images/outfit-gray.jpg","description":"Куртка, футболка и брюки для комфортного городского образа."},
+  {"id":2,"title":"Светлый комплект с жилетом","category":"Спортивные","price":9500,"rating":4.8,"available":true,"image":"images/outfit-light.jpg","description":"Утеплённый жилет, худи и брюки в единой светлой гамме."},
+  {"id":3,"title":"Чёрный комплект Weekend","category":"Спортивные","price":8400,"rating":4.7,"available":true,"image":"images/outfit-black.jpg","description":"Практичный монохромный комплект для прохладной погоды."},
+  {"id":4,"title":"Бордовый пуховик City","category":"Верхняя одежда","price":11900,"rating":4.9,"available":true,"image":"images/outfit-blue.jpg","description":"Тёплый пуховик и джинсы для яркого повседневного образа."},
+  {"id":5,"title":"Тёмно-синий кардиган","category":"Повседневные","price":7900,"rating":4.6,"available":true,"image":"images/outfit-navy.jpg","description":"Базовый кардиган, футболка и джинсы на каждый день."},
+  {"id":6,"title":"Серый комплект Motion","category":"Повседневные","price":7200,"rating":4.5,"available":false,"image":"images/outfit-gray.jpg","description":"Лаконичный комплект с худи и свободными джинсами."},
+  {"id":7,"title":"Синий пуховик North","category":"Верхняя одежда","price":12500,"rating":4.8,"available":true,"image":"images/outfit-blue.jpg","description":"Лёгкий и тёплый пуховик с водоотталкивающей пропиткой."},
+  {"id":8,"title":"Чёрный жилет Active","category":"Верхняя одежда","price":6800,"rating":4.6,"available":true,"image":"images/outfit-black.jpg","description":"Универсальный жилет для многослойных образов."},
+  {"id":9,"title":"Светлый костюм Balance","category":"Спортивные","price":9900,"rating":4.7,"available":true,"image":"images/outfit-light.jpg","description":"Мягкий костюм с жилетом для прогулок и путешествий."},
+  {"id":10,"title":"Тёмно-синий образ Office","category":"Повседневные","price":8700,"rating":4.8,"available":true,"image":"images/outfit-navy.jpg","description":"Сдержанный комплект для учёбы, офиса и встреч."}
+]
+
