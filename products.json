@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Серый спортивный комплект",
+    "category": "sport",
+    "price": 8900,
+    "rating": 4.9,
+    "isAvailable": true,
+    "image": "images/outfit-gray.jpg",
+    "description": "Куртка, футболка и брюки для города."
+  },
+  {
+    "id": 2,
+    "title": "Светлый комплект с жилетом",
+    "category": "sport",
+    "price": 9500,
+    "rating": 4.8,
+    "isAvailable": true,
+    "image": "images/outfit-light.jpg",
+    "description": "Жилет, худи и брюки в светлой гамме."
+  },
+  {
+    "id": 3,
+    "title": "Чёрный комплект с жилетом",
+    "category": "sport",
+    "price": 8400,
+    "rating": 4.7,
+    "isAvailable": true,
+    "image": "images/outfit-black.jpg",
+    "description": "Практичный комплект для прохладной погоды."
+  },
+  {
+    "id": 4,
+    "title": "Бордовый городской комплект",
+    "category": "outerwear",
+    "price": 11900,
+    "rating": 4.9,
+    "isAvailable": true,
+    "image": "images/outfit-blue.jpg",
+    "description": "Тёплый комплект с курткой."
+  },
+  {
+    "id": 5,
+    "title": "Тёмно-синий комплект",
+    "category": "casual",
+    "price": 7900,
+    "rating": 4.6,
+    "isAvailable": true,
+    "image": "images/outfit-navy.jpg",
+    "description": "Повседневный комплект для учёбы и работы."
+  },
+  {
+    "id": 6,
+    "title": "Серый комплект с худи",
+    "category": "casual",
+    "price": 7200,
+    "rating": 4.5,
+    "isAvailable": false,
+    "image": "images/outfit-gray.jpg",
+    "description": "Худи и свободные джинсы."
+  },
+  {
+    "id": 7,
+    "title": "Синий пуховик",
+    "category": "outerwear",
+    "price": 12500,
+    "rating": 4.8,
+    "isAvailable": true,
+    "image": "images/outfit-blue.jpg",
+    "description": "Лёгкий утеплённый пуховик."
+  },
+  {
+    "id": 8,
+    "title": "Чёрный утеплённый жилет",
+    "category": "outerwear",
+    "price": 6800,
+    "rating": 4.6,
+    "isAvailable": true,
+    "image": "images/outfit-black.jpg",
+    "description": "Жилет для многослойного образа."
+  }
+]
