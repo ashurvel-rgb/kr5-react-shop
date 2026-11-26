@@ -1,2 +1,42 @@
-export default function CatalogControls({ search, category, sort, onSearch, onCategory, onSort }) { return <div className="controls"><label>Поиск<input value={search} onChange={(event) => onSearch(event.target.value)} placeholder="Введите название" /></label><label>Категория<select value={category} onChange={(event) => onCategory(event.target.value)}><option value="all">Все</option><option value="sport">Спортивные</option><option value="outerwear">Верхняя одежда</option><option value="casual">Повседневные</option></select></label><label>Сортировка<select value={sort} onChange={(event) => onSort(event.target.value)}><option value="default">По умолчанию</option><option value="price-asc">Цена: по возрастанию</option><option value="price-desc">Цена: по убыванию</option><option value="title">По названию</option></select></label></div>; }
-
+export default function CatalogControls({
+  search,
+  category,
+  sort,
+  onSearch,
+  onCategory,
+  onSort,
+}) {
+  return (
+    <div className="controls">
+      <label>
+        Поиск
+        <input
+          value={search}
+          onChange={(event) => onSearch(event.target.value)}
+          placeholder="Введите название"
+        />
+      </label>
+      <label>
+        Категория
+        <select
+          value={category}
+          onChange={(event) => onCategory(event.target.value)}
+        >
+          <option value="all">Все</option>
+          <option value="sport">Спортивные</option>
+          <option value="outerwear">Верхняя одежда</option>
+          <option value="casual">Повседневные</option>
+        </select>
+      </label>
+      <label>
+        Сортировка
+        <select value={sort} onChange={(event) => onSort(event.target.value)}>
+          <option value="default">По умолчанию</option>
+          <option value="price-asc">Цена: по возрастанию</option>
+          <option value="price-desc">Цена: по убыванию</option>
+          <option value="title">По названию</option>
+        </select>
+      </label>
+    </div>
+  );
+}
