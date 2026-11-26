@@ -1,6 +1,26 @@
-import { useEffect, useMemo, useState } from 'react'; import { getProducts } from '../api/productsApi'; import { filterProducts } from '../utils/productUtils'; import CatalogControls from '../components/CatalogControls'; import ProductList from '../components/ProductList';
-export default function CatalogPage(props){const [products,setProducts]=useState([]); const [loading,setLoading]=useState(true); const [error,setError]=useState(''); const [retry,setRetry]=useState(0); const [query,setQuery]=useState(''); const [category,setCategory]=useState(''); const [sort,setSort]=useState('rating');
-useEffect(()=>{let active=true; setLoading(true); setError(''); getProducts().then(data=>active&&setProducts(data)).catch(()=>active&&setError('Не удалось загрузить каталог.')).finally(()=>active&&setLoading(false)); return()=>{active=false}},[retry]);
-const result=useMemo(()=>filterProducts(products,query,category,sort),[products,query,category,sort]);
-return <main className="section"><div className="container"><p className="eyebrow green">Коллекция 2026</p><h1>Каталог</h1><CatalogControls query={query} category={category} sort={sort} onQuery={setQuery} onCategory={setCategory} onSort={setSort}/>{loading&&<div className="skeleton-grid" aria-label="Загрузка"><i/><i/><i/></div>}{error&&<div className="empty"><p>{error}</p><button className="button" onClick={()=>setRetry(v=>v+1)}>Повторить</button></div>}{!loading&&!error&&<><p>Найдено: {result.length}</p><ProductList products={result} {...props}/></>}</div></main>}
+import { useEffect, useMemo, useState } from 'react';
+import { getProducts } from '../api/productsApi';
+import CatalogControls from '../components/CatalogControls';
+import ProductList from '../components/ProductList';
+import { prepareProducts } from '../utils/productUtils';
+
+export default function CatalogPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [requestNumber, setRequestNumber] = useState(0);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('all');
+  const [sort, setSort] = useState('default');
+
+  useEffect(() => {
+    setLoading(true);
+    setError('');
+    getProducts().then(setProducts).catch(() => setError('Ошибка загрузки каталога.')).finally(() => setLoading(false));
+  }, [requestNumber]);
+
+  const visibleProducts = useMemo(() => prepareProducts(products, search, category, sort), [products, search, category, sort]);
+
+  return <main className="section"><div className="container"><h1>Каталог</h1><CatalogControls search={search} category={category} sort={sort} onSearch={setSearch} onCategory={setCategory} onSort={setSort}/>{loading && <p className="message">Загрузка товаров...</p>}{error && <div className="message"><p>{error}</p><button className="button" onClick={() => setRequestNumber((value) => value + 1)}>Повторить</button></div>}{!loading && !error && <><p>Найдено товаров: {visibleProducts.length}</p><ProductList products={visibleProducts}/></>}</div></main>;
+}
 

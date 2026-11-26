@@ -1,3 +1,3 @@
 import ProductCard from './ProductCard';
-export default function ProductList({ products, onAdd, favorites, onFavorite }) { if (!products.length) return <div className="empty">По вашему запросу ничего не найдено.</div>; return <div className="grid">{products.map((product)=><ProductCard key={product.id} product={product} onAdd={onAdd} favorite={favorites.includes(product.id)} onFavorite={onFavorite}/>)}</div>; }
+export default function ProductList({ products }) { if (products.length === 0) return <p className="message">По вашему запросу ничего не найдено.</p>; return <div className="products-grid">{products.map((product) => <ProductCard key={product.id} product={product}/>)}</div>; }
 

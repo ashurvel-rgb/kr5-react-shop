@@ -1,5 +1,22 @@
-import { useEffect,useState } from 'react'; import { useSearchParams } from 'react-router-dom'; import FormField from '../components/FormField'; import { validateOrder } from '../utils/formValidation';
-const empty={name:'',email:'',phone:'',product:'',comment:'',consent:false};
-export default function OrderPage({products}){const [params]=useSearchParams();const [values,setValues]=useState(()=>{try{return {...empty,...JSON.parse(localStorage.getItem('kr5-draft'))}}catch{return empty}});const [errors,setErrors]=useState({});const [sent,setSent]=useState(false);const [sending,setSending]=useState(false);useEffect(()=>{const id=params.get('product');if(id)setValues(v=>({...v,product:id}))},[params]);useEffect(()=>localStorage.setItem('kr5-draft',JSON.stringify(values)),[values]);const change=e=>setValues(v=>({...v,[e.target.name]:e.target.type==='checkbox'?e.target.checked:e.target.value}));async function submit(e){e.preventDefault();const next=validateOrder(values);setErrors(next);if(Object.keys(next).length)return;setSending(true);await new Promise(r=>setTimeout(r,700));setSending(false);setSent(true);setValues(empty);localStorage.removeItem('kr5-draft')}
-return <main className="section"><div className="container"><p className="eyebrow green">Контролируемая React-форма</p><h1>Оформление заказа</h1><form className="panel form-grid" onSubmit={submit} noValidate><FormField label="Имя *" name="name" error={errors.name}><input id="name" name="name" value={values.name} onChange={change}/></FormField><FormField label="E-mail *" name="email" error={errors.email}><input id="email" name="email" type="email" value={values.email} onChange={change}/></FormField><FormField label="Телефон *" name="phone" error={errors.phone}><input id="phone" name="phone" value={values.phone} onChange={change}/></FormField><FormField label="Товар *" name="product" error={errors.product}><select id="product" name="product" value={values.product} onChange={change}><option value="">Выберите товар</option>{products.map(p=><option key={p.id} value={p.id}>{p.title}</option>)}</select></FormField><div className="field field--wide"><label htmlFor="comment">Комментарий</label><textarea id="comment" name="comment" rows="4" value={values.comment} onChange={change}/></div><div className="field field--wide"><label><input style={{width:'auto'}} name="consent" type="checkbox" checked={values.consent} onChange={change}/> Согласен на обработку данных *</label><p className="error">{errors.consent}</p></div><button className="button" disabled={sending}>{sending?'Отправляем…':'Отправить заказ'}</button></form>{sent&&<p className="success">Заказ успешно отправлен. Мы скоро свяжемся с вами.</p>}</div></main>}
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import FormField from '../components/FormField';
+import { getProducts } from '../api/productsApi';
+import { validateForm } from '../utils/formValidation';
+
+const initialValues = { name: '', email: '', phone: '', product: '', comment: '' };
+export default function OrderPage() {
+  const [searchParams] = useSearchParams();
+  const [products, setProducts] = useState([]);
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState('');
+
+  useEffect(() => { getProducts().then(setProducts).catch(() => setProducts([])); }, []);
+  useEffect(() => { const productId = searchParams.get('product'); if (productId) setValues((current) => ({ ...current, product: productId })); }, [searchParams]);
+  function changeValue(event) { setValues((current) => ({ ...current, [event.target.name]: event.target.value })); }
+  function submitForm(event) { event.preventDefault(); const nextErrors = validateForm(values); setErrors(nextErrors); setSuccess(''); if (Object.keys(nextErrors).length === 0) { setSuccess('Заявка подготовлена.'); setValues(initialValues); } }
+
+  return <main className="section"><div className="container"><h1>Форма заявки</h1><form className="order-form" onSubmit={submitForm} noValidate><FormField label="Имя" name="name" error={errors.name}><input id="name" name="name" value={values.name} onChange={changeValue}/></FormField><FormField label="E-mail" name="email" error={errors.email}><input id="email" name="email" type="email" value={values.email} onChange={changeValue}/></FormField><FormField label="Телефон" name="phone" error={errors.phone}><input id="phone" name="phone" value={values.phone} onChange={changeValue}/></FormField><FormField label="Товар" name="product" error={errors.product}><select id="product" name="product" value={values.product} onChange={changeValue}><option value="">Выберите товар</option>{products.map((product) => <option key={product.id} value={product.id}>{product.title}</option>)}</select></FormField><div className="form-field"><label htmlFor="comment">Комментарий</label><textarea id="comment" name="comment" rows="4" value={values.comment} onChange={changeValue}/></div><button className="button" type="submit">Подготовить заявку</button><p className="success">{success}</p></form></div></main>;
+}
 

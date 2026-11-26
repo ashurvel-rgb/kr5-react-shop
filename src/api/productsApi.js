@@ -1,9 +1,11 @@
-const base = import.meta.env.BASE_URL;
-async function requestProducts() {
-  const response = await fetch(`${base}products.json`);
-  if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+export async function getProducts() {
+  const response = await fetch(`${import.meta.env.BASE_URL}products.json`);
+  if (!response.ok) throw new Error('Не удалось загрузить товары');
   return response.json();
 }
-export async function getProducts() { return requestProducts(); }
-export async function getProductById(productId) { const products = await requestProducts(); return products.find((item) => item.id === Number(productId)) ?? null; }
+
+export async function getProductById(productId) {
+  const products = await getProducts();
+  return products.find((product) => product.id === Number(productId)) ?? null;
+}
 
